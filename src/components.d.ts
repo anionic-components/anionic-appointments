@@ -8,8 +8,8 @@
 import '@stencil/core';
 
 import '@ionic/core';
-import 'anionic-components';
 import 'ionicons';
+import 'anionic-components';
 
 
 export namespace Components {
