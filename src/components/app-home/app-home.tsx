@@ -7,23 +7,25 @@ import { Component } from '@stencil/core';
 export class AppHome {
 
   private anionChipBarElem: HTMLAnionChipBarElement;
-  private ionInputElem: HTMLIonInputElement;
+  private ionLabelsInputElem: HTMLIonInputElement;
 
   componentDidLoad() {
 
     this.anionChipBarElem = document.querySelector('anion-chip-bar');
-    this.ionInputElem = document.querySelector('ion-input');
+    this.ionLabelsInputElem = document.querySelector('#labels-input');
   }
 
   async handleAddLabelClick() {
 
-    let inputElem = await this.ionInputElem.getInputElement();
-    let chipText = inputElem.value;
+    let labelsInputElem = await this.ionLabelsInputElem.getInputElement();
+    let chipText = labelsInputElem.value;
 
-    if (inputElem && chipText) {
+    if (labelsInputElem && chipText) {
 
-      this.anionChipBarElem.addChip(inputElem.value);
+      this.anionChipBarElem.addChip(chipText);
       console.log("Chip added: ", chipText);  
+      this.ionLabelsInputElem.value = null;
+      this.ionLabelsInputElem.setFocus();
     }
   }
 
@@ -41,16 +43,15 @@ export class AppHome {
         </p>
 
         <ion-item>
-          <ion-label>Enter appointment labels:</ion-label>
-          <ion-input></ion-input>
+          <ion-label>Appointment labels:</ion-label>
+          <ion-input id='labels-input'></ion-input>
           <ion-button onClick={()=>this.handleAddLabelClick()}>
             Add Label
           </ion-button>
         </ion-item>
 
-        <anion-chip-bar default-chips="one,two"/>
+        <anion-chip-bar />
 
-        <p>There should be a chip bar above this line. Inspect element, and you'll see anionic-chip-bar in the DOM; it's just not displayed.</p>
       </ion-content>
     ];
   }
